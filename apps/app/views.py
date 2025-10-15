@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_list_or_404
+from .models import (User)
+from .serializers import UserSerializer
 
-# Create your views here.
+
+def api(request):
+    return render(request,'api.html')

@@ -5,8 +5,8 @@ from .models import User, Genre, Cinema, Hall, Seat, Movie, Show_time, Booking
 # User model
 @admin.register(User)
 class UserAdmin(ModelAdmin):
-    list_display = ("id", "name", "email", "phone")
-    search_fields = ("name", "email", "phone")
+    list_display = ("id", "name", "email")
+    search_fields = ("name", "email")
 
 # Genre model
 @admin.register(Genre)
