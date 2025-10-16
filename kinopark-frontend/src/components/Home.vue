@@ -212,6 +212,8 @@ li span{
 }
 .left1{
     margin-left: 90px;
+    width:12px;
+    height: 12px;
 }
 .left2{
     margin-left: 127px;
