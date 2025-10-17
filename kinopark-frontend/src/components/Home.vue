@@ -1,4 +1,40 @@
+<script>
+export default {
+    data(){
+        return{
+            header_menu_item:[
+                { key: "movie", label: "Фильмы" },
+                { key: "cinema", label: "Кинотеатры" },
+                { key: "food", label: "Еда и напитки" },
+                { key: "mykinopark", label: "Мой Kinopark" }
+            ],
+            
+            ShowCities:false,
+            selectCity:"Алматы",
+            cities:["Алматы","Астана","Шымкент","Нарынқол"],
+            select:false
+        }
+    },
+    methods:{
+        toggleCityList(){
+            this.ShowCities = !this.ShowCities
+        },
+        checkedClose(city){
+            this.selectCity = city,
+            this.ShowCities = false
+        },
+        selectCity(city){
+            this.selectCity = city,
+            this.ShowCities = false
+        },
+        
+        
+        
 
+
+    }
+}
+</script>
 <template>
     <header>
         <div class = "header_part">
@@ -6,10 +42,9 @@
                 <img src="https://www.kinopark.kz/static/img/logos.svg" alt="Kinopaark_logo">
                 <div class="header">
                     <ul class="header_menu">
-                        <li class="header_menu_item"><span>Фильмы</span></li>
-                        <li class="header_menu_item"><span>Кинотеатры</span></li>
-                        <li class="header_menu_item"><span>Еда и напитки</span></li>
-                        <li class="header_menu_item"><span>Мой Kinopark</span></li>
+                        <li v-for ="item in header_menu_item"
+                        :key="item.key"
+                        class="header_menu_item"><span>{{item.label}}</span></li>
                     </ul>
                     <div class="lan">
                         <div class="language">Рус</div>
@@ -21,13 +56,25 @@
     <div class="under-header">
         <div class="in-container">
             <div class="search">
-                <button type="button" class="button">
+                <button type="button" class="button" @click="toggleCityList">
                     <img src="https://www.kinopark.kz/static/img/icons/map-marker-alt.svg" alt="map-market">
                     <div class="in-button">
-                        <p class="insearch">Алматы</p>
+                        <p class="insearch">{{ selectCity }}</p>
                     </div>
                     <img src="https://www.kinopark.kz/static/img/icons/caretDownBlack.svg" alt="Downblack" class="left">
                 </button>
+                <ul v-if="ShowCities" class="Showcities">
+                    <li class="cities">
+                        <button v-for="city in cities"
+                            :key="city"
+                            @click="selectCity(city)" class="selectCity">  
+                        <label class="checkbox">
+                            <input type="checkbox" v-model="select" @change="checkedClose(city)">
+                        </label>
+                        {{ city }}
+                        </button>
+                    </li>
+                </ul>
             </div>
             <div class="search">
                 <button type="button" class="button">
@@ -54,9 +101,7 @@
     </div>
 </template>
 
-<script>
 
-</script>
 
 <style>
 *{
@@ -115,7 +160,7 @@ body{
     cursor: pointer;
     margin-bottom: 2px;
 }
-ul{
+.header ul{
     font-size: 1rem;
     font-weight: 500;
     margin-block-start: 1em;
@@ -137,6 +182,11 @@ li span{
     padding-bottom: 21px;
     font-size: 16px;
 
+}
+li span:hover{
+    color: #f96060;
+    text-decoration:underline;
+    text-underline-offset:25px;
 }
 .lan{
     margin-left: 3rem !important;
@@ -166,6 +216,7 @@ li span{
     gap: 20px;
 }
 .search{
+    width:100%;
     display: block;
     box-sizing: border-box;
     flex-basis: 19%;
@@ -175,9 +226,8 @@ li span{
     font-size: 16px;
     font-weight: 700;
     align-items: center;
-        
-
 }
+
 .button{
     white-space: nowrap;
     align-items: center;
@@ -192,6 +242,9 @@ li span{
     font-size: 16px;
     flex: 30%;
     border: 0;
+}
+.button:hover{
+    background-color: #aaa;
 }
 .button img{
     margin-right:8px;
@@ -208,7 +261,7 @@ li span{
     margin-left: auto;
     width:12px;
     height:12px;
-    margin-left: 45px;
+    margin-left: 60px;
 }
 .left1{
     margin-left: 90px;
@@ -228,5 +281,51 @@ li span{
 }
 a{
     text-decoration: none;
+}
+.Showcities{
+    max-width:404px;
+    overflow-y:auto;
+    width:100%;
+    position: absolute;
+    background-color: #fff;
+    border-radius:3px;
+    margin-top: 5px;
+    z-index: 6;
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: Open Sans,sans-serif;
+    display: block;
+
+}
+.Showcities ul{
+    padding: 0px;
+}
+.cities button{
+    border-bottom: 1px solid #ddd;
+}
+.selectCity{
+    display: block;
+    padding:0px 8px;
+    width:100%;
+    padding: 8px 16px 8px 7px;
+    text-align: left;
+    align-items: center;
+    border-left: 5px solid #c31d28;
+    line-height: 28px;
+
+}
+
+input:checked+ .mark{
+    background-color: #c31d28;
+}
+.checkbox{
+    position: relative;
+    padding-left: 15px;
+    cursor: pointer;
+    font-size: 20px;
+    padding-right: 3px;
+}
+.box::after{
+    color: #c31d28;
 }
 </style>
