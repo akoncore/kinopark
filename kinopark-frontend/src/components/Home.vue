@@ -2,13 +2,16 @@
 export default {
     data(){
         return{
-            header_menu_item:[
-                { key: "movie", label: "Фильмы" },
-                { key: "cinema", label: "Кинотеатры" },
-                { key: "food", label: "Еда и напитки" },
-                { key: "mykinopark", label: "Мой Kinopark" }
-            ],
-            
+            movie:"Фильмы",
+            cinema:"Кинотеатры",
+            food:"Еда и напитки",
+            mykinopark:"Мой Kinopark",
+
+            todayInKino:"Сегодня в кино",
+            pre_sales:"Предпродажи",
+            soon:"Скоро",
+            isMovieVisiable:false,
+
             ShowCities:false,
             selectCity:"Алматы",
             cities:["Алматы","Астана","Шымкент","Нарынқол"],
@@ -27,11 +30,12 @@ export default {
             this.selectCity = city,
             this.ShowCities = false
         },
-        
-        
-        
-
-
+        ShowMovie(){
+            this.isMovieVisiable = true
+        },
+        HidenMovie(){
+            this.isMovieVisiable = false
+        }
     }
 }
 </script>
@@ -42,9 +46,29 @@ export default {
                 <img src="https://www.kinopark.kz/static/img/logos.svg" alt="Kinopaark_logo">
                 <div class="header">
                     <ul class="header_menu">
-                        <li v-for ="item in header_menu_item"
-                        :key="item.key"
-                        class="header_menu_item"><span>{{item.label}}</span></li>
+                        <li class="header_menu_item" @mouseenter="ShowMovie">
+                            <span>{{movie}}</span>
+                            <div class="movieMenu"v-if="isMovieVisiable" @mouseleave="HidenMovie">
+                                <div class="movieSchedule">
+                                    <a href="">
+                                        <button class="movieVariant">{{todayInKino}}</button>
+                                    </a>
+                                </div>
+                                <div class="movieSchedule">
+                                    <a href="">
+                                        <button class="movieVariant">{{pre_sales}}</button>
+                                    </a>
+                                </div>
+                                <div class="movieSchedule">
+                                    <a href="">
+                                        <button class="movieVariant">{{soon}}</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="header_menu_item"><span>{{cinema}}</span></li>
+                        <li class="header_menu_item"><span>{{food}}</span></li>
+                        <li class="header_menu_item"><span>{{mykinopark}}</span></li>
                     </ul>
                     <div class="lan">
                         <div class="language">Рус</div>
@@ -327,5 +351,31 @@ input:checked+ .mark{
 }
 .box::after{
     color: #c31d28;
+}
+.movieMenu{
+    position: absolute;
+    margin-left: -48px;
+    z-index:6;
+    display: block;
+    background-color: #fff;
+    opacity:1;
+    box-shadow: 0 2px 8px rgba(0,0,0,.32);
+    border-radius: 3px;
+    
+}
+.movieSchedule{
+    width:220px;
+    height:100%;
+    padding:8px 16px;
+    cursor: pointer;
+}
+.movieVariant{
+    border-radius:0;
+    display: inline-block;
+    font-weight: 700;
+    text-align: center;
+    white-space: nowrap;
+    padding: 8px 16px;
+    cursor: pointer;
 }
 </style>
