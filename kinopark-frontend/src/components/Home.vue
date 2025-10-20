@@ -1,9 +1,12 @@
 <script>
+import { reactive } from 'vue';
+import Cinema from './Cinema.vue';
+
 export default {
     data(){
         return{
             movie:"Фильмы",
-            cinema:"Кинотеатры",
+            headercinema:"Кинотеатры",
             food:"Еда и напитки",
             mykinopark:"Мой Kinopark",
 
@@ -12,23 +15,73 @@ export default {
             soon:"Скоро",
             isMovieVisiable:false,
 
-            ShowCities:false,
+            ShowCatalog:false,
             selectCity:"Алматы",
             cities:["Алматы","Астана","Шымкент","Нарынқол"],
-            select:false
+            select:false,
+
+            ShowCinema:false,
+            selectCinema:"Выберите кинотеатр",
+            cinemas:["KinoPark","KinoPark","KinoPark"],
+            select1:false,
+
+            ShowMoviee:false,
+            selectMovie:"Выберите фильм",
+            movies:["Ыстық ұя","Әменгер","Таптым-ау сені","Сен"],
+            selectedMovies:[],
+            select2:false,
+
+            
         }
     },
     methods:{
         toggleCityList(){
-            this.ShowCities = !this.ShowCities
+            this.ShowCatalog = !this.ShowCatalog
+            this.ShowCinema = false,
+            this.ShowMoviee = false
         },
-        checkedClose(city){
-            this.selectCity = city,
-            this.ShowCities = false
+        toggleCinemaList(){
+            this.ShowCinema = !this.ShowCinema
+            this.ShowCatalog=false
+            this.ShowMoviee = false
+        },
+        toggleMovieList(){
+            this.ShowMoviee = !this.ShowMoviee
+            this.ShowCatalog=false,
+            this.ShowCinema = false
         },
         selectCity(city){
             this.selectCity = city,
-            this.ShowCities = false
+            this.ShowCatalog = false
+        },
+        selectCinema(cinema){
+            this.selectCinema = cinema,
+            this.ShowCinema = false
+        },
+        selectMovie(movie){
+           if(this.selectedMovies.includes(movie)){
+            this.selectedMovies = this.selectedMovies.filter(c=>c!== movie)
+           }
+           else{
+            this.selectedMovies.push(movie)
+           }
+        },
+        selectMovieLength(){
+            if(this.selectedMovies.length == 0){
+                return selectMovie
+            }
+        },
+        checkedClose(city){
+            this.selectCity = city,
+            this.ShowCatalog = false
+        },
+        checkedCloseCinema(cinema){
+            this.selectCinema=cinema,
+            this.ShowCinema = false
+        },
+        checkedCloseMovie(movie){
+            this.selectMovie = movie,
+            this.ShowMoviee = false
         },
         ShowMovie(){
             this.isMovieVisiable = true
@@ -46,12 +99,12 @@ export default {
                 <img src="https://www.kinopark.kz/static/img/logos.svg" alt="Kinopaark_logo">
                 <div class="header">
                     <ul class="header_menu">
-                        <li class="header_menu_item" @mouseenter="ShowMovie">
+                        <li class="header_menu_item" @mouseenter="ShowMovie" @mouseleave="HidenMovie">
                             <span>{{movie}}</span>
-                            <div class="movieMenu"v-if="isMovieVisiable" @mouseleave="HidenMovie">
+                            <div class="movieMenu"v-if="isMovieVisiable">
                                 <div class="movieSchedule">
                                     <a href="">
-                                        <button class="movieVariant">{{todayInKino}}</button>
+                                        <button class="movieVariant" >{{todayInKino}}</button>
                                     </a>
                                 </div>
                                 <div class="movieSchedule">
@@ -66,7 +119,7 @@ export default {
                                 </div>
                             </div>
                         </li>
-                        <li class="header_menu_item"><span>{{cinema}}</span></li>
+                        <li class="header_menu_item"><span>{{headercinema}}</span></li>
                         <li class="header_menu_item"><span>{{food}}</span></li>
                         <li class="header_menu_item"><span>{{mykinopark}}</span></li>
                     </ul>
@@ -87,7 +140,7 @@ export default {
                     </div>
                     <img src="https://www.kinopark.kz/static/img/icons/caretDownBlack.svg" alt="Downblack" class="left">
                 </button>
-                <ul v-if="ShowCities" class="Showcities">
+                <ul v-if="ShowCatalog" class="Showcities">
                     <li class="cities">
                         <button v-for="city in cities"
                             :key="city"
@@ -101,27 +154,55 @@ export default {
                 </ul>
             </div>
             <div class="search">
-                <button type="button" class="button">
+                <button type="button" class="button" @click="toggleCinemaList">
                     <img src="https://www.kinopark.kz/static/img/icons/cinema.svg" alt="5" class="cinema">
                     <div class="in-button">
-                        <p class="insearch">Выберите кинотеатр</p>
+                        <p class="insearch">{{selectCinema}}</p>
                     </div>
                     <img src="https://www.kinopark.kz/static/img/icons/caretDownBlack.svg" alt="Downblack" class="left1">
                 </button>
+                <ul v-if="ShowCinema" class="Showcities">
+                    <li class="cities">
+                        <button v-for="cinema in cinemas"
+                            :key="cinema"
+                            @click="selectCinema(cinema)" class="selectCity">  
+                        <label class="checkbox">
+                            <input type="checkbox" v-model="select1" @change="checkedCloseCinema(cinema)">
+                        </label>
+                        {{ cinema }}
+                        </button>
+                    </li>
+                </ul>
             </div>
             <div class="search">
-                <button type="button" class="button">
+                <button type="button" class="button" @click="toggleMovieList">
                     <img src="https://www.kinopark.kz/static/img/icons/cinema.svg" alt="5">
                     <div class="in-button">
-                        <p class="insearch">Выберите фильм</p>
+                        <p v-if="selectedMovies.length === 0" class="insearch">{{selectMovie}}</p>
+                        <p v-else class="insearch">Выбрано фильмов ({{selectedMovies.length}})</p>
                     </div>
                     <img src="https://www.kinopark.kz/static/img/icons/caretDownBlack.svg" alt="Downblack" class="left2">
                 </button>
+                <ul v-if="ShowMoviee" class="Showcities">
+                    <li class="cities">
+                        <button v-for="(movie,i) in movies"
+                            :key="i"
+                            @click="selectMovie(i)" class="selectCity">  
+                        <label class="checkbox">
+                            <input type="checkbox" :value="movie" v-model="selectedMovies" @change="checkedCloseMovie">
+                        </label>
+                        {{ movie }}
+                        </button>
+                    </li>
+                </ul>
             </div>
             <a href="">
                 <div class="buyticket">Купить билеты</div>
             </a>
         </div>
+    </div>
+    <div class="advertising-slider-wrapper">
+
     </div>
 </template>
 
@@ -355,7 +436,7 @@ input:checked+ .mark{
 .movieMenu{
     position: absolute;
     margin-left: -48px;
-    z-index:6;
+    z-index:999;
     display: block;
     background-color: #fff;
     opacity:1;
@@ -371,11 +452,19 @@ input:checked+ .mark{
 }
 .movieVariant{
     border-radius:0;
+    border:0;
     display: inline-block;
-    font-weight: 700;
+    font-weight: 500;
     text-align: center;
     white-space: nowrap;
     padding: 8px 16px;
     cursor: pointer;
+    font-size:1rem;
+}
+.advertising-slider-wrapper{
+    width:1440px;
+    height:320px;
+    margin: auto;
+    background:url(https://i.ibb.co/vvzHj1sh/1440x320-kb-kopi.jpg);
 }
 </style>
