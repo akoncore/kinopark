@@ -1,8 +1,14 @@
 <script>
 import { reactive } from 'vue';
-import Cinema from './Cinema.vue';
+
+import Movie from './Movie.vue';
+import { useRouter } from 'vue-router';
+
 
 export default {
+    components :{
+        Movie
+    },
     data(){
         return{
             movie:"Фильмы",
@@ -31,10 +37,21 @@ export default {
             selectedMovies:[],
             select2:false,
 
-            
+            cinmemaa:false
         }
     },
+    setup(){
+        const router = useRouter()
+
+        function goToTodayInKino(){
+        router.push('/today')
+        }
+        return{goToTodayInKino}
+    },
     methods:{
+        cinemaShow(){
+            this.cinmemaa =! this.cinmemaa
+        },
         toggleCityList(){
             this.ShowCatalog = !this.ShowCatalog
             this.ShowCinema = false,
@@ -89,6 +106,7 @@ export default {
         HidenMovie(){
             this.isMovieVisiable = false
         }
+
     }
 }
 </script>
@@ -103,8 +121,8 @@ export default {
                             <span>{{movie}}</span>
                             <div class="movieMenu"v-if="isMovieVisiable">
                                 <div class="movieSchedule">
-                                    <a href="">
-                                        <button class="movieVariant" >{{todayInKino}}</button>
+                                    <a href="">   
+                                        <button class="movieVariant" @click="goToTodayInKino" >{{todayInKino}}</button>
                                     </a>
                                 </div>
                                 <div class="movieSchedule">
