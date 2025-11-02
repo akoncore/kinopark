@@ -1,12 +1,14 @@
 <script>
 
-import Movie from './Movie.vue';
+import { useRoute } from 'vue-router';
+import Header from './Header.vue';
+import MovieList from './MovieList.vue';
 
 
 
 export default {
     components:{
-        Movie
+        MovieList,Header
     },
     data(){
         return{
@@ -29,6 +31,14 @@ export default {
 
             cinmemaa:false
         }
+    },
+    setup(){
+        const router = useRoute
+
+        function togoToday(){
+            router.push('/today')
+        }
+        return{togoToday}
     },
     methods:{
         cinemaShow(){
@@ -100,11 +110,11 @@ export default {
         <div class="in-container">
             <div class="search">
                 <button type="button" class="button" @click="toggleCityList">
-                    <img src="https://www.kinopark.kz/static/img/icons/map-marker-alt.svg" alt="map-market">
+                    <img src="../assets/img/map-marker-alt.svg" alt="map-market">
                     <div class="in-button">
                         <p class="insearch">{{ selectCity }}</p>
                     </div>
-                    <img src="https://www.kinopark.kz/static/img/icons/caretDownBlack.svg" alt="Downblack" class="left">
+                    <img src="../assets/img/caretDownBlack.svg" alt="Downblack" class="left">
                 </button>
                 <ul v-if="ShowCatalog" class="Showcities">
                     <li class="cities">
@@ -123,12 +133,12 @@ export default {
             </div>
             <div class="search">
                 <button type="button" class="button" @click="toggleCinemaList">
-                    <img src="https://www.kinopark.kz/static/img/icons/cinema.svg" alt="5" class="cinema">
+                    <img src="../assets/img/cinema.svg" alt="5" class="cinema">
                     <div class="in-button">
                         <p v-if="selectedCinema.length === 0" class="insearch">{{selectCinema}}</p>
                         <p v-else class="insearch">Выбрано кинотеатров ({{selectedCinema.length}})</p>
                     </div>
-                    <img src="https://www.kinopark.kz/static/img/icons/caretDownBlack.svg" alt="Downblack" class="left1">
+                    <img src="../assets/img/caretDownBlack.svg" alt="Downblack" class="left1">
                 </button>
                 <ul v-if="ShowCinema" class="Showcities">
                     <li class="cities">
@@ -145,12 +155,12 @@ export default {
             </div>
             <div class="search">
                 <button type="button" class="button" @click="toggleMovieList">
-                    <img src="https://www.kinopark.kz/static/img/icons/cinema.svg" alt="5">
+                    <img src="../assets/img/movie-circle.svg" alt="5">
                     <div class="in-button">
                         <p v-if="selectedMovies.length === 0" class="insearch">{{selectMovie}}</p>
                         <p v-else class="insearch">Выбрано фильмов ({{selectedMovies.length}})</p>
                     </div>
-                    <img src="https://www.kinopark.kz/static/img/icons/caretDownBlack.svg" alt="Downblack" class="left2">
+                    <img src="../assets/img/caretDownBlack.svg" alt="Downblack" class="left2">
                 </button>
                 <ul v-if="ShowMoviee" class="Showcities">
                     <li class="cities">
@@ -171,13 +181,55 @@ export default {
         </div>
     </div>
     <div class="advertising-slider-wrapper">
-
     </div>
+    <section class="section">
+        <div class="section_header">
+            <p class="header_text" @click="togoToday">Сегодня в кино</p>
+            <p class="header_text2">Скоро на экранах</p>
+            <div class="ml-auto">
+                <p class="text3">Смотреть расписание всех кинотеатров</p>
+            </div>
+        </div>
+
+        <div class="section_content">
+
+        </div>
+    </section>
 </template>
 
 
 
 <style>
+.section{
+    padding: 36px 0;
+}
+.section_header{
+    max-width: 1240px;
+    margin: 0 auto;
+    display: flex;
+    font-family:Open Sans,sans-serif;
+
+}
+
+.header_text{
+    font-size: 36px;
+    font-weight: 700;
+    margin-right: 20px;
+}
+.header_text2{
+    color: rgb(140, 141, 147);
+    font-weight: 400;
+    font-size: 36px;
+    border-left-color:rgb(195, 29, 40);
+    border-left-style:solid;
+    border-left-width:1.6px;
+    padding-left:20px;
+}
+.ml-auto{
+    margin-left: auto;
+    font-size: 13px;
+    font-weight: 400;
+}
 .under-header{
     background-color:#3e454b;
     align-items: center;

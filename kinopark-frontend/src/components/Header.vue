@@ -42,7 +42,7 @@ export default{
     <header>
         <div class = "header_part">
             <div class="container">
-                <img src="https://www.kinopark.kz/static/img/logos.svg" alt="Kinopaark_logo">
+                <img src="../assets/img/logos.svg" alt="Kinopaark_logo">
                 <div class="header">
                     <ul class="header_menu">
                         <li class="header_menu_item" @mouseout="ShowMovie" @mouseleave="HidenMovie">

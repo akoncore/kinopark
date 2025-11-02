@@ -1,6 +1,5 @@
 import Home from "@/components/Home.vue";
-import Movie from "@/components/Movie.vue";
-import Header from "@/components/Header.vue";
+import MovieList from "@/components/MovieList.vue";
 import { createRouter,createWebHistory } from "vue-router";
 
 
@@ -10,7 +9,7 @@ const routes = [
     name:'Home',
     component:Home,
     },
-    {path:'/today',name:'Today',component:Movie}
+    {path:'/today',name:'Today',component:MovieList}
 ]
 
 const router = createRouter({
