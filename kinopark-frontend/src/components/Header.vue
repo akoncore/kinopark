@@ -93,12 +93,13 @@ body{
 .header_part{
     box-shadow: 0 2px 8px rgba(0, 0, 0, .32);
     background-color: #fff;
-    position:static;
+    position:fixed;
     top:0;
     width:100%;
     z-index:101;
     padding-left:0;
     padding-right: 0;
+
 }
 .container{
     height:64px;
@@ -108,6 +109,7 @@ body{
     margin-left: auto;
     margin-right: auto;
     align-items: center;
+    position: relative;
 
 }
 .container img{

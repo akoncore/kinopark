@@ -21,17 +21,17 @@ export default{
         },
         {
           id:3,
-          name:"Капитан Байтасов",
-          ganre:['экшн','драма'],
-          pictures:"https://i.ibb.co/bM1rDs6m/Whats-App-2025-10-06-17-13-32-5cdd521c.webp",
-          age:"16+"
+          name:"Әкеңнің баласы",
+          ganre:['экшн','комедия'],
+          pictures:"https://i.ibb.co/h1V5WCWq/image-2025-10-02-T111708-033.webp",
+          age:"14+"
         },
         {
           id:4,
-          name:"Капитан Байтасов",
-          ganre:['экшн','драма'],
-          pictures:"https://i.ibb.co/bM1rDs6m/Whats-App-2025-10-06-17-13-32-5cdd521c.webp",
-          age:"16+"
+          name:"Изумительная Мокси",
+          ganre:['мультфильм', 'комедия', 'приключения'],
+          pictures:"https://i.ibb.co/xKWWx4b3/image-2025-09-30-T164318-471.webp",
+          age:"6+"
         },
       ]
     }
@@ -42,11 +42,11 @@ export default{
 <template>
   <div class="movie-container">
     <div class="left-router">
-      <p><a href="/">Главная /</a></p>
-      <p><a href=""> Сегодня в кино</a></p>
+      <p class="a1"><a href="/">Главная /</a></p>
+      <p class="a2"><a href=""> Сегодня в кино</a></p>
     </div>
-    <div class="h1">
-      <h1>Сегодня в кино</h1>
+    <div>
+      <h1 class="h1">Сегодня в кино</h1>
     </div>
     <div class="general-movie">
       <div class="movie">
@@ -60,7 +60,9 @@ export default{
           <div class="genre-age">
             <p>{{movie.ganre.join(', ')}}</p>
             <div class="sticker">
-              <p class="age">{{movie.age}}</p>
+              <div class="in-sticker">
+                <p class="age">{{movie.age}}</p>
+              </div>
             </div>
           </div>
           <div class="movie-schulde">
@@ -80,6 +82,7 @@ export default{
   display: block;
   box-sizing: border-box;
   font-family: Open Sans,sans-serif;
+  margin-top:64px;
 }
 
 .general-movie{
@@ -91,6 +94,7 @@ export default{
   flex-wrap: wrap;
   row-gap: 2%;
   column-gap: 2%;
+  
 }
 .movies-list{
   margin-bottom: 48px;
@@ -110,22 +114,66 @@ export default{
   font-weight: 400;
 }
 
-.age{
-  margin-left: 120px;
-   width: 16px;
-  height: 16px;
-  background-color: #ffd362;
+.stciker{
+  position: relative;
+  min-width:24px;
+  height: 24px;
+  margin-left: 8px;
+}
+.in-sticker{
+  position: absolute;
+  width: 16px;
+  height:16px;
+  background:#ffd362;
+  border-radius:2px;
   transform: rotate(45deg);
 }
+.age{
+  transform: rotate(-45deg);
+  font-size: .625rem;
+  font-weight: 700;
+}
+
 .genre-age p{
   margin-top: 4px;
+  width:75%;
 }
 .movies-list img{
   width:291.25px;
   height: 369px;
   border-radius: 3px;
+  object-fit: cover;
+}
+.movie-schulde button{
+  background-color: #c31d28;
+  color: #fff;
+  border: 0;
+  padding: 8px 36px;
+  text-align: center;
+  border-radius: 3px;
 }
 .left-router{
   display: flex;
+  padding: 24px 0;
+}
+.a2 a{
+  text-decoration: none;
+  color:#0e0e0e;
+  padding-right:5px;
+  font-weight: 700;
+  margin-left:6px;
+  font-size: 13px;
+}
+.a1 a{
+  text-decoration: none;
+  color:#0e0e0e;
+  padding-right:5px;
+  font-weight: 400;
+  margin-left:6px;
+  font-size: 13px;
+}
+.h1{
+  font-size: 3.25rem;
+  font-weight: 700;
 }
 </style>

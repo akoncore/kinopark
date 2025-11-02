@@ -3,12 +3,13 @@
 import { useRoute } from 'vue-router';
 import Header from './Header.vue';
 import MovieList from './MovieList.vue';
+import Movie from './Movie.vue';
 
 
 
 export default {
     components:{
-        MovieList,Header
+        MovieList,Header,Movie
     },
     data(){
         return{
@@ -192,7 +193,7 @@ export default {
         </div>
 
         <div class="section_content">
-
+            <Movie/>
         </div>
     </section>
 </template>
@@ -202,6 +203,10 @@ export default {
 <style>
 .section{
     padding: 36px 0;
+}
+.section_content{
+    max-width: 1240px;
+    margin: 0 auto;
 }
 .section_header{
     max-width: 1240px;
@@ -236,7 +241,9 @@ export default {
     height: 82px;
     color: rgb(14,14,14);
     display: flex;
+    margin-top:64px;
 }
+
 .in-container{
     align-items: center;
     display: flex;
