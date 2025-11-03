@@ -33,6 +33,35 @@ export default{
           pictures:"https://i.ibb.co/xKWWx4b3/image-2025-09-30-T164318-471.webp",
           age:"6+"
         },
+        {
+          id:5,
+          name:"Ыстық ұя",
+          ganre:['драма'],
+          pictures:"https://i.ibb.co/84d7TmnB/100-70.webp",
+          age:"14+"
+        },
+        {
+          id:6,
+          name:"Бақыт құшағында",
+          ganre:['мюзикл', 'романтическая ','комедия'],
+          pictures:"https://i.ibb.co/84GnqxJ8/Whats-App-2025-10-01-11-24-14-cca049fa.webp",
+          age:"14+"
+        },
+        {
+          id:7,
+          name:"Болған оқиға",
+          ganre:['драма','комедия'],
+          pictures:"https://i.ibb.co/JF5BbMmB/image.png",
+          age:"14+"
+        },
+        {
+          id:8,
+          name:"Трон Арес",
+          ganre:['фантастика','боевик'],
+          pictures:"https://i.ibb.co/QjpNSfKV/Whats-App-2025-10-06-11-00-10-e0a59b8b.webp",
+          age:"18+"
+        },
+        
       ]
     }
   }
@@ -92,8 +121,7 @@ export default{
 .movie{
   display: flex;
   flex-wrap: wrap;
-  row-gap: 2%;
-  column-gap: 2%;
+  gap:2%;
   
 }
 .movies-list{
@@ -107,6 +135,7 @@ export default{
   font-size: 16px;
   font-weight: 700;
 }
+
 .genre-age{
   display: flex;
   margin-bottom: 16px;

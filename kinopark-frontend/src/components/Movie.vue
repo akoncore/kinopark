@@ -32,6 +32,34 @@ export default{
           pictures:"https://i.ibb.co/xKWWx4b3/image-2025-09-30-T164318-471.webp",
           age:"6+"
         },
+        {
+          id:5,
+          name:"Ыстық ұя",
+          ganre:['драма'],
+          pictures:"https://i.ibb.co/84d7TmnB/100-70.webp",
+          age:"14+"
+        },
+        {
+          id:6,
+          name:"Бақыт құшағында",
+          ganre:['мюзикл', 'романтическая ','комедия'],
+          pictures:"https://i.ibb.co/84GnqxJ8/Whats-App-2025-10-01-11-24-14-cca049fa.webp",
+          age:"14+"
+        },
+        {
+          id:7,
+          name:"Болған оқиға",
+          ganre:['драма','комедия'],
+          pictures:"https://i.ibb.co/JF5BbMmB/image.png",
+          age:"14+"
+        },
+        {
+          id:8,
+          name:"Трон Арес",
+          ganre:['фантастика','боевик'],
+          pictures:"https://i.ibb.co/QjpNSfKV/Whats-App-2025-10-06-11-00-10-e0a59b8b.webp",
+          age:"18+"
+        },
       ]
     }
   }
@@ -61,6 +89,9 @@ export default{
           </div>
         </div>
       </div>
+    </div>
+    <div class="Schulde">
+      <button ><router-link to="/today">Посмотреть все фильмы</router-link></button>
     </div>
 </template>
 
@@ -140,5 +171,22 @@ export default{
   padding: 8px 36px;
   text-align: center;
   border-radius: 3px;
+  cursor: pointer;
+}
+.Schulde button{
+  padding:8px 36px;
+  border-radius:3px;
+  border:0;
+  background-color: #c31d28;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.Schulde{
+  text-align: center;
+}
+.Schulde a{
+  color: #fff;
 }
 </style>

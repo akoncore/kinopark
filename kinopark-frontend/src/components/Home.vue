@@ -195,6 +195,9 @@ export default {
         <div class="section_content">
             <Movie/>
         </div>
+        <div class="section-cinema">
+            
+        </div>
     </section>
 </template>
 
@@ -207,6 +210,7 @@ export default {
 .section_content{
     max-width: 1240px;
     margin: 0 auto;
+    padding: 36px 0;
 }
 .section_header{
     max-width: 1240px;
