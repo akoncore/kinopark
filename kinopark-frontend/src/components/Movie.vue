@@ -84,9 +84,6 @@ export default{
               </div>
             </div>
           </div>
-          <div class="movie-schulde">
-            <button>Расписание</button>
-          </div>
         </div>
       </div>
     </div>

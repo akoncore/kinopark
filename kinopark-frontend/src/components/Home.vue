@@ -4,12 +4,14 @@ import { useRoute } from 'vue-router';
 import Header from './Header.vue';
 import MovieList from './MovieList.vue';
 import Movie from './Movie.vue';
+import MyCinema from './MyCinema.vue';
+
 
 
 
 export default {
     components:{
-        MovieList,Header,Movie
+        MovieList,Header,Movie,MyCinema
     },
     data(){
         return{
@@ -195,8 +197,8 @@ export default {
         <div class="section_content">
             <Movie/>
         </div>
-        <div class="section-cinema">
-            
+        <div class="section_content">
+            <MyCinema/>
         </div>
     </section>
 </template>
@@ -211,6 +213,7 @@ export default {
     max-width: 1240px;
     margin: 0 auto;
     padding: 36px 0;
+    font-family: Open Sans, sans-serif;
 }
 .section_header{
     max-width: 1240px;
