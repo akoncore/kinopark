@@ -116,25 +116,5 @@ export default{
     font-size: 24px;
     font-weight: 700;
 }
-.item-title-info {
-    display: none;
-    padding: 16px;
-    position: absolute;
-    width:100%;
-    height: 100%;
-}
-.item-title {
-    display: inline-block;
-    color: #fff;
-}
-.info {
-    
-    margin-top: 8px;
-
-}
-.in-info{
-    display: block;
-    color: #fff;
-}
 
 </style>

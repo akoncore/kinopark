@@ -9,6 +9,7 @@ import MyCinema from './MyCinema.vue';
 
 
 
+
 export default {
     components:{
         MovieList,Header,Movie,MyCinema
