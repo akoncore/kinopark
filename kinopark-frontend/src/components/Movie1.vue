@@ -6,10 +6,10 @@ export default{
       movies:[
         {
           id:1,
-          name:"Сыныптас",
-          ganre:['драма','комедия'],
-          pictures:"https://i.ibb.co/Y76XZ5BV/Whats-App-2025-10-13-15-11-25-c8f72724.webp",
-          age:"18+"
+          name:"Жездуха Кореяда",
+          ganre:['комедия'],
+          pictures:"https://i.ibb.co/V0X0TsBP/image-2025-10-17-T162122-699.webp",
+          age:"16+"
         },
         {
           id:2,
@@ -63,10 +63,10 @@ export default{
       ],
     }
   },
-  emits:['soon-in-kino'],
+  emits:['soon-in-today'],
   methods:{
-    SoonInKino(){
-      this.$emit('soon-in-kino')
+    TodayKino(){
+      this.$emit('soon-in-today')
     }
   }
 }
@@ -74,8 +74,8 @@ export default{
 
 <template>
     <div class="section_header">
-        <p class="header_text1">Сегодня в кино</p>
-        <p class="header_text3" @click="SoonInKino">Скоро на экранах</p>
+        <p class="header_text3" @click="TodayKino">Сегодня в кино</p>
+        <p class="header_text1">Скоро на экранах</p>
       <div class="ml-auto">
         <p class="text3">Смотреть расписание всех кинотеатров</p>
       </div>
@@ -207,22 +207,21 @@ export default{
 
 }
 
-.header_text1{
+.header_text3{
     font-size: 36px;
-    font-weight: 700;
+    font-weight: 400;
     margin-right: 20px;
     cursor: pointer;
-    
 }
-.header_text3{
-    color: rgb(140, 141, 147);
-    font-weight: 400;
+.header_text1{
+    border-right-color:rgb(195, 29, 40);
+    border-right-style:solid;
+    border-right-width:1.6px;
+    padding-right:20px;
+    font-weight: 700;
     font-size: 36px;
-    border-left-color:rgb(195, 29, 40);
-    border-left-style:solid;
-    border-left-width:1.6px;
-    padding-left:20px;
     cursor: pointer;
+    
 }
 .ml-auto{
     margin-left: auto;

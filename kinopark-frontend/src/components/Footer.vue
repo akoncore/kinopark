@@ -19,13 +19,13 @@
                     </div>
                 </div>
                 <div class="container-schulde">
-                    <p class="rgb170">Расписание</p>
+                    <h4 class="rgb170">Расписание</h4>
                     <div class="schulde">
                         <p>Сегодня в кино</p>
                         <p>Скоро на экранах</p>
                         <p>Эксклюзив</p>
                     </div>
-                    <p class="rgb170">Технологии</p>
+                    <h4 class="rgb170">Технологии</h4>
                     <div class="technology">
                         <p>IMAX</p>
                         <p>Dolby Atmos</p>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="Company">
-                    <p class="rgb1702">О компании</p>
+                    <h4 class="rgb1702">О компании</h4>
                     <div class="companies">
                         <p>О нас</p>
                         <p>Кинотеатры</p>
@@ -47,13 +47,21 @@
                     <div class="images">
                         
                     </div>
+                    <div class="connect-kino">
+                        <p>+7-775-007-57-57</p>
+                        <p>info@kiopark.kz</p>
+                        <p>Карта сайта</p>
+                        <h4 class="rgb170">Допалнительно</h4>
+                        <p>Часто задаваемые вопросы</p>
+                        <p>Покупка билетов</p>
+                    </div>
                 </div>
         </div>
     </div>
     <div class="footer-line"></div>
     <div class="footer-end">
         <p class="rgb170">© Kinopark Theatres.Все права защищены</p>
-        <p>Пользовательское соглашение</p>
+        <p class="end">Пользовательское соглашение</p>
     </div>
 </div>
 </template>
@@ -73,6 +81,12 @@
     width:1240px;
     padding: 56px 0 ;
 }
+.logo-kinopark p{
+    cursor: pointer;
+}
+.logo-kinopark p:hover{
+    color: rgb(195,29,40);
+}
 .container-logo{
     display: inline-block;
 }
@@ -86,6 +100,7 @@
 }
 .logo-in img{
     margin-bottom: 32px;
+    cursor: pointer;
 }
 .container-schulde{
     display: flex;
@@ -104,6 +119,7 @@
 }
 .rgb170{
     color: rgb(170,170,170);
+    font-weight: 400;
 }
 .technology{
     margin:6px 0;
@@ -124,12 +140,15 @@
 .footer-line{
     border:1px solid #4e4e4e;
 }
-.Company{
-    
-}
 .rgb1702{
     color:rgb(170,170,170);
     margin-bottom:8px;
+}
+.connect-kino{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap:24px;
 }
 .companies{
     display: flex;
@@ -148,4 +167,11 @@
     justify-content: space-between;
     padding: 16px 0;
 }
+.end{
+    font-size: 13px;
+}
+.install img{
+    cursor: pointer;
+}
+
 </style>
