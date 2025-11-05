@@ -1,6 +1,11 @@
 
 <script>
+import DetailMovie from './DetailMovie.vue';
+import MovieGroup from './MovieGroup.vue';
+import MovieGroup1 from './MovieGroup1.vue';
+
 export default{
+  components:{DetailMovie,MovieGroup,MovieGroup1},
   data(){
     return{
       movies:[
@@ -61,12 +66,20 @@ export default{
           age:"18+"
         },
       ],
+      detail:false,
+      detail1:false
     }
   },
-  emits:['soon-in-kino'],
+  
   methods:{
     SoonInKino(){
       this.$emit('soon-in-kino')
+    },
+    toggleDetail(){
+      this.detail = !this.detail 
+    },
+    toggleDetail1(){
+      this.detail1 = !this.detail1
     }
   }
 }
@@ -81,25 +94,16 @@ export default{
       </div>
     </div>
     <div class="general-movie">
-      <div class="movie">
-        <div class="movies-list" v-for="movie in movies":key="movie.id">
-          <div class="img-movie">
-            <img :src="movie.pictures" alt="">
-          </div>
-          <div class="name-movie">
-            <p>{{movie.name }}</p>
-          </div>
-          <div class="genre-age">
-            <p>{{movie.ganre.join(', ')}}</p>
-            <div class="sticker">
-              <div class="in-sticker">
-                <p class="age">{{movie.age}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+      <MovieGroup @toggle-detail = "toggleDetail"/>
+      <div class="detail" v-if="detail">
+        <DetailMovie />
+      </div>
+      <MovieGroup1 @toggle-detail1 = "toggleDetail1"/>
+      <div class="detail" v-if="detail1">
+        <DetailMovie />
       </div>
     </div>
+
     <div class="Schulde">
       <button ><router-link to="/today">Посмотреть все фильмы</router-link></button>
     </div>
