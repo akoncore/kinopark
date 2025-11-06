@@ -3,21 +3,79 @@
         <div class="detail-container">
             <div class="detail-movie-video-and-description">
                 <div class="desciption">
-                    <p></p>
+                    <div class="name-movie1">
+                        <p>{{movie.name }}</p>
+                    </div>
+                    <div class="genre-age">
+                        <p>{{movie.ganre.join(', ')}}</p>
+                    <div class="sticker">
+                        <div class="in-sticker">
+                            <p class="age">{{movie.age}}</p>
+                        </div>
+                        </div>
+                    </div> 
+                    <div class="duration-and-des" v-if="movie.duration && movie.country && movie.discription">
+                        <p><strong>Продолжительность:</strong> {{movie.duration}}</p>
+                        <p><strong>Страна:</strong> {{movie.country}}</p>
+                        <p>{{movie.discription}}</p>
+                    </div> 
                 </div>
             </div>
+            <div class="video">
+                  <iframe frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; 
+                  gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" width="100%" height="100%"
+                  src="https://www.youtube.com/embed/LYyHpfTtwUA?autoplay=1&mute=0&controls=0&origin=https%3A%2F%2Fwww.
+                  kinopark.kz&playsinline=1&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&ecver=2&enablejsapi=1&widgetid=3&forigin=https%3A%2F%2Fwww.
+                  kinopark.kz%2Fru&aoriginsup=1&gporigin=https%3A%2F%2Fwww.kinopark.kz%2Fru%2Fmovies%2Ftoday&vf=1"
+                  ></iframe>
+                </div>
         </div>
     </div>
 </template>
 
 <script>
-
+export default{
+    props:{
+      movie:Object
+    },
+}
 </script>
 
 <style>
 .detail-movie{
     max-width: 1240px;
-    height: 400px;
-    background-color: cadetblue;
+    font-family: Open Sans, sans-serif;
+}
+.detail-container{
+  max-width: 1240px;
+  display: flex;
+}
+.detail-movie-video-and-description{
+    display: flex;
+    margin-bottom:28px;
+    width:100%;
+ }
+.desciption{
+  display: block;
+  
+}
+.name-movie1{
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom:8px;
+    line-height: 33px;
+}
+.genre-age{
+    display: flex;
+    margin-top:4px;
+    align-items:flex-start;
+}
+.video{
+ width:100%;
+}
+iframe{
+  width:100%;
+  height:320px;
+  scrollbar-width: none;
 }
 </style>

@@ -2,10 +2,10 @@
 <script>
 import DetailMovie from './DetailMovie.vue';
 import MovieGroup from './MovieGroup.vue';
-import MovieGroup1 from './MovieGroup1.vue';
+
 
 export default{
-  components:{DetailMovie,MovieGroup,MovieGroup1},
+  components:{DetailMovie,MovieGroup},
   data(){
     return{
       movies:[
@@ -14,7 +14,10 @@ export default{
           name:"Сыныптас",
           ganre:['драма','комедия'],
           pictures:"https://i.ibb.co/Y76XZ5BV/Whats-App-2025-10-13-15-11-25-c8f72724.webp",
-          age:"18+"
+          age:"18+",
+          duration:"2ч 10м",
+          country:"Казахстан",
+          discription:"После долгих лет разлуки двое бывших одноклассников случайно встречаются на встрече выпускников. Вспоминая школьные годы, они понимают, что многое изменилось, но чувства остались прежними.",
         },
         {
           id:2,
@@ -66,8 +69,8 @@ export default{
           age:"18+"
         },
       ],
-      detail:false,
-      detail1:false
+      detailGroup1:null,
+      detailGroup2:null,
     }
   },
   
@@ -75,11 +78,14 @@ export default{
     SoonInKino(){
       this.$emit('soon-in-kino')
     },
-    toggleDetail(){
-      this.detail = !this.detail 
-    },
-    toggleDetail1(){
-      this.detail1 = !this.detail1
+    toggleDetail(group,movie){
+      if(group === 1){
+        this.detailGroup2 = null
+        this.detailGroup1 = this.detailGroup1 && this.detailGroup1.id === movie.id ? null : movie
+      }else if(group === 2){
+        this.detailGroup1 = null
+        this.detailGroup2 = this.detailGroup2 && this.detailGroup2.id === movie.id ? null : movie
+      }
     }
   }
 }
@@ -94,13 +100,19 @@ export default{
       </div>
     </div>
     <div class="general-movie">
-      <MovieGroup @toggle-detail = "toggleDetail"/>
-      <div class="detail" v-if="detail">
-        <DetailMovie />
+      <MovieGroup
+        :movies1="movies.slice(0,4)"
+        @toggle-detail = "toggleDetail(1,$event)"
+        :detail="detailGroup1"/>
+      <div class="detail" v-if="detailGroup1">
+        <DetailMovie :movie="detailGroup1"/>
       </div>
-      <MovieGroup1 @toggle-detail1 = "toggleDetail1"/>
-      <div class="detail" v-if="detail1">
-        <DetailMovie />
+      <MovieGroup
+        :movies1="movies.slice(4)"
+        @toggle-detail = "toggleDetail(2,$event)"
+        :detail="detailGroup2"/>
+      <div class="detail" v-if="detailGroup2">
+        <DetailMovie :movie="detailGroup2"/>
       </div>
     </div>
 

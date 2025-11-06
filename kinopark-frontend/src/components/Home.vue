@@ -4,13 +4,13 @@ import Header from './Header.vue';
 import MovieList from './MovieList.vue';
 import Movie from './Movie.vue';
 import MyCinema from './MyCinema.vue';
-import Movie1 from './Movie1.vue';
+import SoonMovie from './SoonMovie.vue';
 import UnderHeader from './UnderHeader.vue';
 
 
 export default {
     components:{
-        MovieList,Header,Movie,MyCinema,Movie1,UnderHeader
+        MovieList,Header,Movie,MyCinema,SoonMovie,UnderHeader
     },
     data(){
         return{
@@ -41,7 +41,7 @@ export default {
             <Movie @soon-in-kino = "SoonKino"/>
         </div>
         <div class="section_content" v-show="hidden_movie1">
-            <Movie1 @soon-in-today = "TodayKino"/>
+            <SoonMovie @soon-in-today = "TodayKino"/>
         </div>
         <div class="section_content">
             <MyCinema/>
