@@ -18,7 +18,7 @@
                         <p><strong>Продолжительность:</strong> {{movie.duration}}</p>
                         <p><strong>Страна:</strong> {{movie.country}}</p>
                         <p class="description">{{movie.discription}}</p>
-                        <button type="button" class="Button">Смотреть расписание</button>
+                        <button type="button" class="Button" @click="openShulde">Смотреть расписание</button>
                     </div> 
                 </div>
             </div>
@@ -35,10 +35,21 @@
 </template>
 
 <script>
+import Movie from './Movie.vue';
+import SchuldeMovie from './SchuldeMovie.vue';
+
+
 export default{
+
+    components:{SchuldeMovie},
     props:{
       movie:Object
     },
+    methods: {
+        openShulde(){
+            this.$router.push(`/schulde/${this.movie.id}`)
+        }
+    }
 }
 </script>
 

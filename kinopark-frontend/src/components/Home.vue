@@ -6,16 +6,18 @@ import Movie from './Movie.vue';
 import MyCinema from './MyCinema.vue';
 import SoonMovie from './SoonMovie.vue';
 import UnderHeader from './UnderHeader.vue';
+import SchuldeMovie from './SchuldeMovie.vue';
 
 
 export default {
     components:{
-        MovieList,Header,Movie,MyCinema,SoonMovie,UnderHeader
+        MovieList,Header,Movie,MyCinema,SoonMovie,UnderHeader,SchuldeMovie
     },
     data(){
         return{
             hidden_movie:true,
-            hidden_movie1:false
+            hidden_movie1:false,
+            closeSchulde :false
         }
     },
     methods:{
@@ -26,7 +28,11 @@ export default {
         TodayKino(){
             this.hidden_movie = true
             this.hidden_movie1 = false
+        },
+        OpenSchulde(){
+            this.closeSchulde = true
         }
+
     }
 }
 </script>

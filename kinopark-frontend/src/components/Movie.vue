@@ -2,10 +2,11 @@
 <script>
 import DetailMovie from './DetailMovie.vue';
 import MovieGroup from './MovieGroup.vue';
+import SchuldeMovie from './SchuldeMovie.vue';
 
 
 export default{
-  components:{DetailMovie,MovieGroup},
+  components:{DetailMovie,MovieGroup,SchuldeMovie},
   data(){
     return{
       movies:[

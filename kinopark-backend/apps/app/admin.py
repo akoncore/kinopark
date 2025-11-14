@@ -61,7 +61,7 @@ class SeatAdmin(admin.ModelAdmin):
 # Movie model
 @admin.register(Movie)
 class MovieAdmin(admin.ModelAdmin):
-    list_display = ("id", "title", "duration", "language", "rating")
+    list_display = ("id", "title", "duration", "rating")
     filter_horizontal = ("genre",)
 
 # Show_time model

@@ -168,6 +168,9 @@ class Command(BaseCommand):
             description =" ".join(choices(self.SOME_WORDS, k=7)).capitalize()
             language = choice(LANGUAGE)
             rating = round(uniform(1.0,5.0),2)
+            genre:Genre = choice(exited_genre)
+            country = "kazakhstan"
+            cast = " ".join(choices(self.SOME_WORDS,k=2))
             create_movie.append(
                 Movie(
                     title = title,
@@ -175,6 +178,9 @@ class Command(BaseCommand):
                     duration = randint(50,150),
                     language = language,
                     rating = rating,
+                    genre = genre,
+                    country = country,
+                    cast = cast
                 )
             )
              

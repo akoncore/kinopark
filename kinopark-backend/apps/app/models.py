@@ -51,8 +51,11 @@ class Movie(models.Model):
     genre = models.ManyToManyField(Genre, related_name='movies')
     description = models.TextField(blank=True)
     duration = models.IntegerField(help_text="Duration in minutes")
-    language = models.CharField(max_length=50, blank=True)
     rating = models.FloatField(blank=True, null=True)
+    country = models.TextField()
+    treiler = models.TextField()
+    director = models.CharField(max_length=100)
+    cast = models.CharField(max_length=255)
 
     def __str__(self):
         return self.title
