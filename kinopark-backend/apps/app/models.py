@@ -1,15 +1,7 @@
 from django.db import models
 from apps.abstract.models import AbstractBaseModel
 
-# User model for app users with contact info
-class User(models.Model):
-    name = models.CharField(max_length=100, blank=True)
-    email = models.CharField(max_length=100, unique=True, blank=True)
-    password = models.CharField(max_length=100)
-    
 
-    def __str__(self):
-        return self.name
 
 # Movie genre (e.g., Action, Comedy)
 class Genre(models.Model):
@@ -41,40 +33,42 @@ class Seat(models.Model):
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE, related_name='seats')
     row = models.PositiveIntegerField()
     number = models.PositiveIntegerField()
+    class Meta:
+        unique_together = ('hall', 'row', 'number')
 
     def __str__(self):
         return f"Row {self.row}, Seat {self.number} - {self.hall.name}"
 
 # Movie with genre, duration, language, and rating
-class Movie(models.Model):
+class Movie(AbstractBaseModel):
     title = models.CharField(max_length=100, unique=True)
     genre = models.ManyToManyField(Genre, related_name='movies')
-    description = models.TextField(blank=True)
-    duration = models.IntegerField(help_text="Duration in minutes")
     rating = models.FloatField(blank=True, null=True)
-    country = models.TextField()
-    treiler = models.TextField()
-    director = models.CharField(max_length=100)
-    cast = models.CharField(max_length=255)
+    duration = models.IntegerField(help_text="Duration in minutes")
+    description = models.TextField(blank=True)
+    
+    language = models.CharField(max_length=50, blank=True)
+    poster = models.ImageField(upload_to='posters/', null=True, blank=True)
+    
 
     def __str__(self):
         return self.title
-
+    
 # Show time for a movie in a hall with price
-class Show_time(models.Model):
+class Showtime(models.Model):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='show_times')
     hall = models.ForeignKey(Hall, on_delete=models.CASCADE, related_name='show_times')
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    start_time = models.DateField()
+    end_time = models.DateField()
     price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self):
-        return f"{self.movie.title} at {self.start_time} in {self.hall.name}"
+        return f"{self.movie.title} at {self.start_time.strftime('%Y-%m-%d')} in {self.hall.name}"
 
 # Booking of a show time by a user for a seat
-class Booking(models.Model):
+""" class Booking(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bookings')
-    show_time = models.ForeignKey(Show_time, on_delete=models.CASCADE, related_name='bookings')
+    show_time = models.ForeignKey(Showtime, on_delete=models.CASCADE, related_name='bookings')
     seats = models.ForeignKey(Seat, on_delete=models.CASCADE, related_name='bookings')
     booking_time = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=50, choices=[
@@ -86,6 +80,4 @@ class Booking(models.Model):
     def __str__(self):
         return f"Booking by {self.user_id.name} for {self.show_time.movie.title} at {self.show_time.start_time}"
 
-# Payment for a booking with method and status
-#class Payment(models.Model):
-    
+ """

@@ -167,4 +167,53 @@ class ChangePasswordSerializer(Serializer):
         return attrs
     
     
-    
+class TokenSerializer(Serializer):
+    """JWT Tokens"""
+    refresh = CharField(help_text="JWT refresh token")
+    access = CharField(help_text="JWT access token")
+
+
+class AuthResponseSerializer(Serializer):
+    """Authentication response with tokens"""
+    message = CharField(help_text="Success message")
+    user = UserProfileSerializer(help_text="User profile data")
+    tokens = TokenSerializer(help_text="JWT tokens")
+
+
+class ErrorSerializer(Serializer):
+    """Error response"""
+    error = CharField(help_text="Error message")
+
+
+class ValidationErrorSerializer(Serializer):
+    """Validation error response"""
+    errors = CharField(help_text="Validation errors")
+
+
+class MessageSerializer(Serializer):
+    """Simple message response"""
+    message = CharField(help_text="Response message")
+
+
+class TokenRefreshResponseSerializer(Serializer):
+    """Token refresh response"""
+    access = CharField(help_text="New JWT access token")
+    message = CharField(help_text="Success message")
+
+
+class TokenVerifyResponseSerializer(Serializer):
+    """Token verification response"""
+    valid = CharField(help_text="Token validity status")
+    user = UserProfileSerializer(help_text="User data")
+
+
+class PasswordChangeResponseSerializer(Serializer):
+    """Password change response"""
+    message = CharField(help_text="Success message")
+    tokens = TokenSerializer(help_text="New JWT tokens after password change")
+
+
+class ProfileUpdateResponseSerializer(Serializer):
+    """Profile update response"""
+    message = CharField(help_text="Success message")
+    user = UserProfileSerializer(help_text="Updated user data")
