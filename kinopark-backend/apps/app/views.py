@@ -1,9 +1,26 @@
 from django.shortcuts import render
-from rest_framework import viewsets
+from rest_framework import viewsets ,status,permissions
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from apps.app.models import Movie, Cinema, Hall, Seat, Genre, Showtime
-from apps.app.serializers import  SeatSerializer,  MovieSerializer, CinemaSerializer, HallSerializer, ShowtimeSerializer 
+from apps.app.models import( 
+    Movie,
+    Cinema,
+    Hall,
+    Seat,
+    Genre,
+    Showtime,
+    Payment,
+    Booking
+)
+from apps.app.serializers import  (
+    SeatSerializer,
+    MovieSerializer,
+    CinemaSerializer,
+    HallSerializer,
+    ShowtimeSerializer,
+    PaymentSerializer,
+    BookingSerializer
+)
 
 # Create your views here.
 class MovieViewSet(viewsets.ReadOnlyModelViewSet):
@@ -25,4 +42,39 @@ class ShowtimeViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Showtime.objects.select_related('movie', 'hall').all().order_by('start_time')
     serializer_class = ShowtimeSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['movie', 'hall', 'start_time'] # Filter by movie ID, hall ID, start time
+    filterset_fields = ['movie', 'hall', 'start_time'] # Filter by movie ID, hall ID, start time 
+    
+    
+class BookingViewSet(viewsets.ModelViewSet):
+    serializer_class = BookingSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        
+        return Booking.objects.filter(user=self.request.user).select_related('showtime', 'seat')
+
+    def create(self, request, *args, **kwargs):
+        """Переопределяем create, чтобы вернуть список всех созданных броней"""
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        bookings = serializer.save()
+        out_serializer = BookingSerializer(bookings, many=True)
+        return Response(out_serializer.data, status=status.HTTP_201_CREATED)
+    
+class PaymentViewSet(viewsets.ModelViewSet):
+    queryset = Payment.objects.all()
+    serializer_class = PaymentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        payment = serializer.save()
+        
+        # Обновление статуса брони
+        payment.status = 'paid'
+        payment.save()
+        payment.booking.status = 'booked'
+        payment.booking.save()
+        
+        return Response({'message': 'Вы успешно купили билет!'}, status=status.HTTP_201_CREATED)

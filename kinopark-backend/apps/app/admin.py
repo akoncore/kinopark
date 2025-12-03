@@ -1,6 +1,14 @@
 from django.contrib import admin
-from .models import  Genre, Cinema, Hall, Seat, Movie, Showtime
-
+from .models import (
+    Genre,
+    Cinema,
+    Hall,
+    Seat,
+    Movie,
+    Showtime,
+    Payment,
+    Booking
+)
 
 # Genre model
 @admin.register(Genre)
@@ -68,8 +76,38 @@ class ShowtimeAdmin(admin.ModelAdmin):
     list_display = ("id", "movie", "hall", "start_time", "end_time", "price")
     list_filter = ("start_time", "hall__cinema")
 # Booking model
-""" @admin.register(Booking)
+@admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ("id", "user_id", "show_time", "seats", "status")
+    list_display = ("id", "user", "showtime", "seat", "booking_time")
+    list_filter = ("booking_time", "showtime__movie")
+    search_fields = ("user__username", "showtime__movie__title")
 
- """
+from django.contrib import admin
+from django.utils.html import format_html
+from django.urls import reverse
+
+# Остальные модели оставляем без изменений
+
+@admin.register(Payment)
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ("id", "booking", "amount", "status", "mark_paid", "payment_time")
+    list_filter = ("status", "payment_time")  # только поля модели
+    search_fields = ("booking__user__username",)
+
+    # Кнопка для ручной оплаты
+    def mark_paid(self, obj):
+        if obj.status != 'paid':
+            return format_html(
+                '<a class="button" href="{}">Оплатить</a>',
+                reverse('admin:mark_payment_paid', args=[obj.id])
+            )
+        return "Оплачено"
+    
+    mark_paid.short_description = 'Действие'
+
+    # Автоматическое обновление статуса брони после оплаты
+    def save_model(self, request, obj, form, change):
+        if obj.status == 'paid' and obj.booking.status != 'booked':
+            obj.booking.status = 'booked'
+            obj.booking.save()
+        super().save_model(request, obj, form, change)
