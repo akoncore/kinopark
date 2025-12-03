@@ -1,7 +1,7 @@
-import Home from "@/components/Home.vue";
-import MovieList from "@/components/MovieList.vue";
-import SchuldeMovie from "@/components/SchuldeMovie.vue";
-import UnderHeader from "@/components/UnderHeader.vue";
+import Home from "@/views/Home.vue";
+import MovieList from "@/views/MovieList.vue";
+import SchuldeMovie from "@/views/SchuldeMovie.vue";
+import UnderHeader from "@/components/layout/UnderHeader.vue";
 import { createRouter,createWebHistory } from "vue-router";
 
 

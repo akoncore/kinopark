@@ -1,20 +1,25 @@
 
-<template>
-    <Header />
-    <router-view/>
-    <Footer />
-</template>
-
-<script>
-import Footer from './components/Footer.vue';
-import Header from './components/Header.vue';
-
-
-export default{
-    components: {Header,Footer}
-};
+<script setup>
+import Header from '@/components/layout/Header.vue'
+import Footer from '@/components/layout/Footer.vue'
 </script>
 
-<style scoped>
+<template>
+  <div id="app">
+    <Header />
+    <router-view />
+    <Footer />
+  </div>
+</template>
 
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+}
 </style>

@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import Movie from './Movie.vue';
-import SchuldeMovie from './SchuldeMovie.vue';
+
+import SchuldeMovie from '@/views/SchuldeMovie.vue';
 
 
 export default{
