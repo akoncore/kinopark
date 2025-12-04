@@ -6,7 +6,7 @@ from django.contrib.auth.hashers import make_password
 from django.db.models import QuerySet
 
 
-from apps.app.models import Genre,Cinema,Hall,Seat,Movie,Booking,Show_time
+from apps.app.models import Genre,Cinema,Hall,Seat,Movie,Booking,Showtime
 from apps.auths.models import CustomUser
 
 class Command(BaseCommand):
@@ -260,10 +260,10 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(f"Created {movie_after - movie_before} movies and assigned genres."))     
     
     def __generate_show_time(self,show_time_count = 20)->None:
-        create_show_time:list[Show_time] = []
+        create_show_time:list[Showtime] = []
         exited_movie : QuerySet[Movie] = Movie.objects.all()
         exited_hall : QuerySet[Hall] = Hall.objects.all()
-        show_before:int = Show_time.objects.count()
+        show_before:int = Showtime.objects.count()
         
         if not exited_movie.exists():
             return
@@ -284,7 +284,7 @@ class Command(BaseCommand):
             end_t = time(end_hour % 24, 0)
                         
             create_show_time.append(
-                Show_time(
+                Showtime(
                     movie = movie,
                     hall = hall,
                     start_time = start_t,
@@ -293,8 +293,8 @@ class Command(BaseCommand):
                 )
             )
         
-        Show_time.objects.bulk_create(create_show_time,ignore_conflicts=True)
-        show_after:int = Show_time.objects.count()
+        Showtime.objects.bulk_create(create_show_time,ignore_conflicts=True)
+        show_after:int = Showtime.objects.count()
         self.stdout.write(
             self.style.SUCCESS(
                 f"Created {show_after - show_before } show_time"
@@ -305,14 +305,14 @@ class Command(BaseCommand):
         create_booking :list[Booking] = []
         
         exited_user_id:QuerySet[CustomUser] = CustomUser.objects.all()
-        exited_show_time:QuerySet[Show_time] = Show_time.objects.all()
+        exited_show_time:QuerySet[Showtime] = Showtime.objects.all()
         exited_seat:QuerySet[Seat] = Seat.objects.all()
         booking_before : int=Booking.objects.count()
         
         i:int
         for i in range(book_count):
             user_id:CustomUser=choice(exited_user_id)
-            show_time:Show_time=choice(exited_show_time)
+            show_time:Showtime=choice(exited_show_time)
             seats:Seat = choice(exited_seat)
             start_h = randint(4,12)
             start_m = choice([0,15,30,45])
@@ -347,7 +347,7 @@ class Command(BaseCommand):
         self.__generate_seat(seat_count=20)
         self.__generate_show_time(show_time_count=20)
         self.__generate_movie(movie_count=20)
-        #self.__generate_booking(book_count=20)
+        self.__generate_booking(book_count=20)
         self.stdout.write(
             "The whole process to generate data took: {} seconds".format(
                     (datetime.now() - start_time).total_seconds()

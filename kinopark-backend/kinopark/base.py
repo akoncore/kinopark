@@ -12,19 +12,19 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+from kinopark.conf import *
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+ROOT_URLCONF = "kinopark.urls"
+WSGI_APPLICATION = "kinopark.wsgi.application"
+ASGI_APPLICATION = "kinopark.asgi.application"
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8lgxny-%nzy9^#r%2p-3na$#*$y4q8(w1xru#an=nf#gbo4f03'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = []
 AUTH_USER_MODEL = "auths.CustomUser"
@@ -116,25 +116,20 @@ SIMPLE_JWT = {
 }
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Authentication API',
-    'DESCRIPTION': 'Complete Authentication API with JWT tokens',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
-    'SCHEMA_PATH_PREFIX': '/api/v1',
-    'COMPONENT_SPLIT_REQUEST': True,
-    'SWAGGER_UI_SETTINGS': {
-        'deepLinking': True,
-        'persistAuthorization': True,
-        'displayOperationId': True,
-        'defaultModelsExpandDepth': 2,
-        'defaultModelExpandDepth': 2,
-        'docExpansion': 'list',
-        'filter': True,
+    "TITLE": "KinoPoisk API",
+    "VERSION": "1.2.3",
+    "SERVE_INCLUDE_SCHEMA": True,
+    "COMPONENT_SPLIT_REQUEST": True,
+    "APPEND_COMPONENTS": {
+        "securitySchemes": {
+            "Bearer": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+            }
+        }
     },
-    'TAGS': [
-        {'name': 'Authentication', 'description': 'User authentication and token management'},
-        {'name': 'Users', 'description': 'User profile management and settings'},
-    ],
+    "SECURITY": [{"Bearer": []}],
 }
 
 DEBUG_TOOLBAR_PANELS = [
@@ -175,7 +170,7 @@ SHELL_PLUS = "ipython"
 SHELL_PLUS_PRINT_SQL = True
 SHELL_PLUS_PRINT_SQL_TRUNCATE = 1000
 
-ROOT_URLCONF = 'kinopark.urls'
+
 
 TEMPLATES = [
     {
@@ -193,18 +188,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'kinopark.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
