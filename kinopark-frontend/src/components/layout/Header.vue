@@ -26,6 +26,7 @@ export default{
         }
         return{goToTodayInKino}
     },
+    
     methods:{
         ShowMovie(){
             this.isMovieVisiable = true
@@ -33,6 +34,9 @@ export default{
         HidenMovie(){
             this.isMovieVisiable = false
         },
+        goToProfile(){
+            this.$router.push('/profile')
+        }   
 
     }
 }
@@ -69,8 +73,16 @@ export default{
                         <li class="header_menu_item"><span>{{food}}</span></li>
                         <li class="header_menu_item"><span>{{mykinopark}}</span></li>
                     </ul>
-                    <div class="lan">
-                        <div class="language">Рус</div>
+                    <div class="user_actions"> 
+                
+                        <button class="profile_icon_button" @click="goToProfile">
+                            <img src="C:\Users\User\Desktop\Kbtu\kinopark\kinopark-frontend\src\assets\img\i (1).webp" alt="User Profile" class="user_profile_icon">
+                            </button>
+
+                        <div class="lan">
+                            <div class="language">Рус</div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -167,7 +179,7 @@ li span:hover{
     text-underline-offset:25px;
 }
 .lan{
-    margin-left: 3rem !important;
+    margin-left: 2rem !important;
     align-items: center;
 }
 .language{
@@ -201,5 +213,24 @@ li span:hover{
     padding: 8px 16px;
     cursor: pointer;
     font-size:1rem;
+}
+
+.user_actions {
+    display: flex;
+    align-items: center;
+    gap: px; /* Белгіше мен тіл блогының арасындағы қашықтық */
+}
+
+.profile_icon_button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0; 
+}
+
+.user_profile_icon {
+    width: 40px; /* Белгішенің өлшемін реттеңіз */
+    height: 40px;
+    vertical-align: middle;
 }
 </style>

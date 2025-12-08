@@ -5,6 +5,7 @@ import MovieGroup from '@/components/movie/MovieGroup.vue'
 import DetailMovie from '@/components/movie/DetailMovie.vue'
 import SoonMovie from '@/views/SoonMovie.vue'
 import MyCinema from '@/views/MyCinema.vue'
+import ProfileView from '@/views/ProfileView.vue'
 
 export default {
   components: {
@@ -18,6 +19,7 @@ export default {
     return {
       hidden_movie: true,
       hidden_movie1: false,
+      profile:false,
       movies: [
         {
           id: 1,
@@ -92,6 +94,10 @@ export default {
       this.hidden_movie = true
       this.hidden_movie1 = false
     },
+    goToProfile() {
+      this.profile = true
+      this.$emit('profile')
+    },
     toggleDetail(group, movie) {
       if (group === 1) {
         this.detailGroup2 = null
@@ -158,7 +164,9 @@ export default {
       <div class="section_content" v-show="hidden_movie1">
         <SoonMovie @soon-in-today="TodayKino" />
       </div>
-
+      <div class="section_header" v-show="hidden-profile">
+        <ProfileView @profile = "goToProfile"/>
+      </div>
       <!-- Секция "Мой Kinopark" -->
       <div class="section_content">
         <MyCinema />

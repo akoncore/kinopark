@@ -3,6 +3,7 @@ import MovieList from "@/views/MovieList.vue";
 import SchuldeMovie from "@/views/SchuldeMovie.vue";
 import UnderHeader from "@/components/layout/UnderHeader.vue";
 import { createRouter,createWebHistory } from "vue-router";
+import ProfileView from "@/views/ProfileView.vue";
 
 
 const routes = [
@@ -13,7 +14,8 @@ const routes = [
     },
     {path:'/today',name:'Today',component:MovieList},
     {path:'/underheader', name:'UnderHeader',component:UnderHeader},
-    {path:'/schulde/:id',name:'SculdeMovie',component:SchuldeMovie}
+    {path:'/schulde/:id',name:'SculdeMovie',component:SchuldeMovie},
+    {path:'/profile',name:'Profile',component:ProfileView},
     
 ]
 
